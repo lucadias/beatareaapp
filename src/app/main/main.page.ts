@@ -9,8 +9,11 @@ export class MainPage implements OnInit {
 
   songs: Array<any>
   currentSong: String
+  playStatus: String
+
   constructor() {
     this.currentSong = "-"
+    this.playStatus = "Play"
     this.songs = [
       {"name":"Smells Like Teen Spirit","artist":"Nirvana"},
       {"name":"One","artist":"U2"},
@@ -55,12 +58,21 @@ export class MainPage implements OnInit {
   ngOnInit() {
   }
 
-    playSong(song: any){
-      console.log(song.name)
-      this.currentSong = song.name
+  playSong(song: any){
+    console.log(song.name)
+    this.currentSong = song.name
   }
-  playNextSong(){
 
+  playNextSong(){
+    console.log("sub")
+  }
+
+  playPauseButton(){
+    if(this.playStatus === "Play"){  
+      this.playStatus = "Pause"
+    } else {
+      this.playStatus = "Play"
+    }
   }
 
 }
