@@ -1,14 +1,66 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>
-      Ionic Blank
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content padding>
+  <ion-button *ngIf=showIfNotFirstSlide class="btnPrev" (click)="goToPrevSlide()">ZURÜCK</ion-button>
+  <ion-button class="btnNext" (click)="goToNextSlide()">{{nextButtonText}}</ion-button>
+  <ion-slides id="ion-slides" class="slider" pager="true" (ionSlideDidChange)="slideChanged()">
+      
+    <ion-slide>
+      <div class="contentdiv">
+        <img style="float:left;clear:both;padding:2em;" src="../assets/logo.png"/>
+        <h1 style="font-size: 2em;float:left;clear:both;">Willkommen zu der Beatarea App.</h1>
+      </div>
+    </ion-slide>
 
-<ion-content>
-  <div class="ion-padding">
-    The world is your oyster.
-    <p>If you get lost, the <a target="_blank" rel="noopener" href="https://ionicframework.com/docs/">docs</a> will be your guide.</p>
-  </div>
+    <ion-slide>
+      <div class="contentdiv">
+        <h1 style="clear:both;">Wählen Sie den Logitech Media Server aus der folgenden Liste aus:</h1>
+        <!-- List of Input Items -->
+        <div style="clear:both;padding: 0px auto;">
+          <ion-list>
+            <ion-item>
+              <ion-label lines="full" text-center>192.168.1.123</ion-label>
+              <ion-radio slot="end"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label lines="full" text-center>192.168.1.132</ion-label>
+              <ion-radio slot="end"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label lines="full" text-center>192.168.1.132</ion-label>
+              <ion-radio slot="end"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label lines="full" text-center>192.168.1.132</ion-label>
+              <ion-radio slot="end"></ion-radio>
+            </ion-item>
+          </ion-list>
+        </div>
+      </div>
+    </ion-slide>
+      
+    <ion-slide>
+      <div class="contentdiv">
+        <h1>Wählen Sie ihr Gerät zum Tracken aus der Liste aus:</h1>
+        <div style="clear:both;padding: 0px auto;">
+            <ion-list>
+              <ion-item>
+                <ion-label text-center>192.168.1.123</ion-label>
+                <ion-radio slot="end"></ion-radio>
+              </ion-item>
+              <ion-item>
+                <ion-label text-center>192.168.1.132</ion-label>
+                <ion-radio slot="end"></ion-radio>
+              </ion-item>
+              <ion-item>
+                <ion-label text-center>192.168.1.132</ion-label>
+                <ion-radio slot="end"></ion-radio>
+              </ion-item>
+              <ion-item>
+                <ion-label text-center>192.168.1.132</ion-label>
+                <ion-radio slot="end"></ion-radio>
+              </ion-item>
+            </ion-list>
+          </div>
+      </div>
+    </ion-slide>
+  </ion-slides>
 </ion-content>

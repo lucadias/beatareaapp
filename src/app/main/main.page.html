@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Songs</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div>
+  <ion-list padding lines="full">
+    <ion-item  lines="full" *ngFor="let song  of songs" (click)="playSong(song)"> 
+      <div>
+       <ion-label style="font-size: 1.2em;">{{song.name}}</ion-label>  
+       <ion-label>{{song.artist}}</ion-label> 
+      </div>
+    </ion-item>
+  </ion-list>
+  </div>
+</ion-content>
+
+
+<ion-footer>
+  <ion-toolbar>
+    <div style="float:left;clear:both;padding-left: 1em;width:100%;" text-center>
+    <ion-label style="width:100%;float:left;clear:both">Now Playing: </ion-label>
+    <ion-label style="padding:0.5em 1em 1em 1em;width:100%;font-weight:bold;float:left;clear:both">{{currentSong}}</ion-label>
+    </div>
+    <div class="controlButtonsDiv" style="clear:both">
+        <ion-button>Prev</ion-button>
+        <ion-button>Pause</ion-button>
+        <ion-button (onClick)="playNextSong()">Next</ion-button>
+    </div>
+  </ion-toolbar>
+</ion-footer>
