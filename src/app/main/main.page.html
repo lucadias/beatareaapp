@@ -1,6 +1,7 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Songs</ion-title>
+    <ion-title padding style="float:left">Songs</ion-title>
+    <ion-icon name="settings" style="margin-top:0.4em;margin-right:1em;float:right;font-size: 2em;" (click)="goToSettingsPage()"></ion-icon>
   </ion-toolbar>
 </ion-header>
 
@@ -25,9 +26,9 @@
     <ion-label style="padding:0.5em 1em 1em 1em;width:100%;font-weight:bold;float:left;clear:both">{{currentSong}}</ion-label>
     </div>
     <div class="controlButtonsDiv" style="clear:both">
-        <ion-button>Prev</ion-button>
+        <ion-button><</ion-button>
         <ion-button (click)="playPauseButton()">{{playStatus}}</ion-button>
-        <ion-button (click)="playNextSong()">Next</ion-button>
+        <ion-button (click)="playNextSong()">></ion-button>
     </div>
   </ion-toolbar>
 </ion-footer>

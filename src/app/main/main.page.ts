@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NavController } from '@ionic/angular'
 
 @Component({
   selector: 'app-main',
@@ -11,7 +12,7 @@ export class MainPage implements OnInit {
   currentSong: String
   playStatus: String
 
-  constructor() {
+  constructor(public navCtrl: NavController) {
     this.currentSong = "-"
     this.playStatus = "Play"
     this.songs = [
@@ -61,6 +62,7 @@ export class MainPage implements OnInit {
   playSong(song: any){
     console.log(song.name)
     this.currentSong = song.name
+    this.playStatus = "Pause"
   }
 
   playNextSong(){
@@ -73,6 +75,10 @@ export class MainPage implements OnInit {
     } else {
       this.playStatus = "Play"
     }
+  }
+
+  goToSettingsPage(){
+    this.navCtrl.navigateForward('/settings')
   }
 
 }
