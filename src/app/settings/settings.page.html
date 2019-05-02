@@ -6,5 +6,78 @@
 </ion-header>
 
 <ion-content>
-
+  <p padding>Hier können Sie die einzelnen Lautsprecher gruppieren und einstellen.</p>
+  <!--
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle>Lautsprecher</ion-card-subtitle>
+      <ion-card-title>Speaker</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-range color="danger" pin="true" color="primary">
+        <ion-icon slot="start" name="volume-low"></ion-icon>
+        <ion-icon slot="end" name="volume-high"></ion-icon>
+      </ion-range>
+      <ion-label style="text-align: center;width:100%">Setzen Sie den Delay dieses Speakers:</ion-label>
+      <div class="delayButtonsDiv">
+        <ion-button fill="outline" slot="end">-5</ion-button>
+        <ion-input type="number" value="0" style="text-align: center"></ion-input>
+        <ion-button fill="outline" slot="end">+5</ion-button>
+      </div>
+    </ion-card-content>
+  </ion-card>
+  -->
+  <ion-reorder-group (ionItemReorder)="onRenderItems($event)" disabled="false">
+      <ion-reorder>
+        <ion-card>
+          <ion-card-content>
+            <ion-label>Speaker 1</ion-label>
+            <ion-range style="padding-top: 0em;" color="primary">
+              <ion-icon slot="start" name="volume-low"></ion-icon>
+              <ion-icon slot="end" name="volume-high"></ion-icon>
+            </ion-range>
+            <ion-label style="text-align: center;width:100%">Setzen Sie den Delay dieses Speakers:</ion-label>
+            <div class="delayButtonsDiv">
+              <ion-button fill="outline" slot="end">-5</ion-button>
+              <ion-input type="number" value="0" style="text-align: center"></ion-input>
+              <ion-button fill="outline" slot="end">+5</ion-button>
+            </div>
+          </ion-card-content>
+        </ion-card>
+      </ion-reorder>
+      <ion-reorder>
+        <ion-card>
+          <ion-card-content>
+            <ion-label>Speaker 2</ion-label>
+            <ion-range style="padding-top: 0em;" color="primary">
+              <ion-icon slot="start" name="volume-low"></ion-icon>
+              <ion-icon slot="end" name="volume-high"></ion-icon>
+            </ion-range>
+            <ion-label style="text-align: center;width:100%">Setzen Sie den Delay dieses Speakers:</ion-label>
+            <div class="delayButtonsDiv">
+              <ion-button fill="outline" slot="end">-5</ion-button>
+              <ion-input type="number" value="0" style="text-align: center"></ion-input>
+              <ion-button fill="outline" slot="end">+5</ion-button>
+            </div>
+          </ion-card-content>
+        </ion-card>
+      </ion-reorder>
+      <ion-reorder>
+        <ion-card>
+          <ion-card-content>
+            <ion-label>Speaker 3</ion-label>
+            <ion-range style="padding-top: 0em;" color="primary">
+              <ion-icon slot="start" name="volume-low"></ion-icon>
+              <ion-icon slot="end" name="volume-high"></ion-icon>
+            </ion-range>
+            <ion-label style="text-align: center;width:100%">Setzen Sie den Delay dieses Speakers:</ion-label>
+            <div class="delayButtonsDiv">
+              <ion-button fill="outline" slot="end">-5</ion-button>
+              <ion-input type="number" value="0" style="text-align: center"></ion-input>
+              <ion-button fill="outline" slot="end">+5</ion-button>
+            </div>
+          </ion-card-content>
+        </ion-card>
+      </ion-reorder>  
+  </ion-reorder-group>
 </ion-content>
