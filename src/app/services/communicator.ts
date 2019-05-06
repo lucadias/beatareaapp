@@ -35,32 +35,24 @@ export class Communicator {
     }
 
     pushTrack(trackID: Number){    
-      command : 
-        this._mqttService.unsafePublish(
-          "beatarea/v1/lms/user/luca/command",
-          JSON.stringify({
-            "command" : "play",
-            "parameters" : [trackID.toString()]
-          }),
-          {qos: 1, retain: false});
-        /*
-        var mqtt = require('mqtt')
-        var client  = mqtt.connect('mqtt://192.168.1.119')
-    
-        client.on('connect', function () {
-          client.subscribe('presence', function (err) {
-            if (!err) {
-              client.publish('presence', 'Hello mqtt')
-            }
-          })
-        })
-    
-        client.on('message', function (topic, message) {
-          // message is Buffer
-          console.log(message.toString())
-          client.end()
-        })
-        */
+      this._mqttService.unsafePublish(
+        "beatarea/v1/lms/user/luca/command",
+        JSON.stringify({
+          "command" : "play",
+          "parameters" : [trackID]
+        }),
+        {qos: 1, retain: false}
+      );  
+    }
+
+    pauseTrack(){
+      this._mqttService.unsafePublish(
+        "beatarea/v1/lms/user/luca/command",
+        JSON.stringify({
+          "command" : "pause"
+        }),
+        {qos: 1, retain: false}
+      );  
     }
 }
 //steal this bro: https://medium.com/javascript-everyday/singleton-made-easy-with-typescript-6ad55a7ba7ff

@@ -28,7 +28,7 @@
     
     <div class="controlButtonsDiv" style="clear:both">
         
-        <ion-button><</ion-button>
+        <ion-button (click)="playPrevSong()"><</ion-button>
         <ion-button (click)="playPauseButton()">{{playStatus}}</ion-button>
         <ion-button (click)="playNextSong()">></ion-button>
     </div>

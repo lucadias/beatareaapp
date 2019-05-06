@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core'
 import { NavController } from '@ionic/angular'
 import { Communicator } from '../services/communicator'
 import { Song } from '../objects/song'
@@ -10,74 +10,46 @@ import { Song } from '../objects/song'
 })
 export class MainPage implements OnInit {
 
-  songs: Array<any>
-  currentSong: String
-  playStatus: String
+  songs: Array<Song>
+  currentSong: string
+  playStatus: string
+  indexActiveSong: number
   
 
   constructor(public navCtrl: NavController, public coo: Communicator) {
     this.currentSong = "-"
     this.playStatus = "Play"
     this.songs = coo.getSongListString()
-  /*  this.songs = [
-      {"name":"Smells Like Teen Spirit","artist":"Nirvana"},
-      {"name":"One","artist":"U2"},
-      {"name": "Bohemian Rhapsody","artist":"Quenn"},
-      {"name": "Hey Jude","artist":"The Beatles"},
-      {"name": "Like A Rolling Stone","artist":"Bob Dylan"},
-      {"name": "I Can't Get No Satisfaction","artist":"Rolling Stones"},
-      {"name": "Hero of War","artist":"Rise Against"},
-      {"name": "bury a friend","artist":"Billie Eillish"},
-      {"name": "Unsquare Dance","artist":"Dave Brubeck"},
-      {"name":"Smells Like Teen Spirit","artist":"Nirvana"},
-      {"name":"One","artist":"U2"},
-      {"name": "Bohemian Rhapsody","artist":"Quenn"},
-      {"name": "Hey Jude","artist":"The Beatles"},
-      {"name": "Like A Rolling Stone","artist":"Bob Dylan"},
-      {"name": "I Can't Get No Satisfaction","artist":"Rolling Stones"},
-      {"name": "Hero of War","artist":"Rise Against"},
-      {"name": "bury a friend","artist":"Billie Eillish"},
-      {"name": "Unsquare Dance","artist":"Dave Brubeck"},
-      {"name":"Smells Like Teen Spirit","artist":"Nirvana"},
-      {"name":"One","artist":"U2"},
-      {"name": "Bohemian Rhapsody","artist":"Quenn"},
-      {"name": "Hey Jude","artist":"The Beatles"},
-      {"name": "Like A Rolling Stone","artist":"Bob Dylan"},
-      {"name": "I Can't Get No Satisfaction","artist":"Rolling Stones"},
-      {"name": "Hero of War","artist":"Rise Against"},
-      {"name": "bury a friend","artist":"Billie Eillish"},
-      {"name": "Unsquare Dance","artist":"Dave Brubeck"},
-      {"name":"Smells Like Teen Spirit","artist":"Nirvana"},
-      {"name":"One","artist":"U2"},
-      {"name": "Bohemian Rhapsody","artist":"Quenn"},
-      {"name": "Hey Jude","artist":"The Beatles"},
-      {"name": "Like A Rolling Stone","artist":"Bob Dylan"},
-      {"name": "I Can't Get No Satisfaction","artist":"Rolling Stones"},
-      {"name": "Hero of War","artist":"Rise Against"},
-      {"name": "bury a friend","artist":"Billie Eillish"},
-      {"name": "Unsquare Dance","artist":"Dave Brubeck"}
-    ]*/
-    
-   }
+  }
 
+   
   ngOnInit() {
   }
 
   playSong(song: Song){
-    console.log(song.id)
     this.currentSong = song.title
     this.playStatus = "Pause"
     this.coo.pushTrack(song.id)
+    this.indexActiveSong = this.songs.findIndex((searchsong) => {return searchsong.id == song.id})
   }
 
+ 
+
   playNextSong(){
-    console.log("sub")
+    this.indexActiveSong = this.indexActiveSong < this.songs.length ? this.indexActiveSong+1 : 0
+    this.playSong(this.songs[this.indexActiveSong])
+  }
+
+  playPrevSong(){
+    this.indexActiveSong = this.indexActiveSong < this.songs.length ? this.indexActiveSong-1 : 0
+    this.playSong(this.songs[this.indexActiveSong])
   }
 
   playPauseButton(){
-    if(this.playStatus === "Play"){  
+    this.coo.pauseTrack()
+    if(this.playStatus === "Play"){
       this.playStatus = "Pause"
-    } else {
+    } else {  
       this.playStatus = "Play"
     }
   }
