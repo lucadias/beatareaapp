@@ -1,19 +1,34 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core'
 import { NavController } from '@ionic/angular'
-import { CordovaMqTTPlugin } from 'cordova-plugin-mqtt'
+
+import { Observable } from 'rxjs';
+import {
+  IMqttMessage,
+  MqttModule,
+  IMqttServiceOptions,
+  MqttService
+} from 'ngx-mqtt';
+
+declare function require(name:string);
 
 @Component({
   selector: 'app-settings',
   templateUrl: './settings.page.html',
   styleUrls: ['./settings.page.scss'],
 })
-export class SettingsPage implements OnInit {
 
-  constructor(public navCtrl: NavController) { 
-    
-  }
 
-  ngOnInit() {
+export class SettingsPage  {
+
+
+  private subscription: any;
+  public message: string;
+
+  constructor(public navCtrl: NavController, public _mqttService: MqttService) { 
+    this.subscription = this._mqttService.observe('beatarea/v1/lms/media/tracks').subscribe((message: IMqttMessage) => {
+      this.message = message.payload.toString();
+      console.log(this.message)
+    });
   }
 
   saveSettings(){
@@ -27,37 +42,29 @@ export class SettingsPage implements OnInit {
     ev.detail.complete();
   }
 
-  testMQTT(){
-    cordova.plugins.CordovaMqTTPlugin.connect({
-      url:"tcp://test.mosquitto.org", //a public broker used for testing purposes only. Try using a self hosted broker for production.
-      port:1883,
-      clientId:"YOUR_USER_ID_LESS_THAN_24_CHARS",
-      connectionTimeout:3000,
-      willTopicConfig:{
-          qos:0, //default is 0
-          retain:true, //default is true
-          topic:"<will topic>",
-          payload:"<will topic message>"
-      },
-      username:"uname",
-      password:'pass',
-      keepAlive:60,
-      isBinaryPayload: false, //setting this 'true' will make plugin treat all data as binary and emit ArrayBuffer instead of string on events
-      success:function(s){
-          console.log("connect success");
-      },
-      error:function(e){
-          console.log("connect error");
-      },
-      onConnectionLost:function (){
-          console.log("disconnect");
-      },
-      routerConfig:{
-          router:routerObject //instantiated router object
-          publishMethod:"emit", //refer your custom router documentation to get the emitter/publishing function name. The parameter should be a string and not a function.
-          useDefaultRouter:false //Set false to use your own topic router implementation. Set true to use the stock topic router implemented in the plugin.
-      }
-  })
-  }
 
+
+  testMQTT(){    
+    this._mqttService.unsafePublish("test/luca", "hallo123", {qos: 1, retain: true});
+/*
+    var mqtt = require('mqtt')
+    var client  = mqtt.connect('mqtt://192.168.1.119')
+
+    client.on('connect', function () {
+      client.subscribe('presence', function (err) {
+        if (!err) {
+          client.publish('presence', 'Hello mqtt')
+        }
+      })
+    })
+
+    client.on('message', function (topic, message) {
+      // message is Buffer
+      console.log(message.toString())
+      client.end()
+    })*/
+
+  }
 }
+
+

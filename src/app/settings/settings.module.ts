@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 
 import { SettingsPage } from './settings.page';
 
+
 const routes: Routes = [
   {
     path: '',
@@ -19,8 +20,8 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
-    RouterModule.forChild(routes)
-  ],
+    RouterModule.forChild(routes),
+    ],
   declarations: [SettingsPage]
 })
 export class SettingsPageModule {}
