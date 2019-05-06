@@ -10,6 +10,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
 import {MqttModule, MqttService, IMqttServiceOptions} from 'ngx-mqtt'
+import { Communicator } from './services/communicator';
 
 
 export const MQTT_SERVICE_OPTIONS : IMqttServiceOptions = {
@@ -42,7 +43,7 @@ export function mqttServiceFactory() {
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    
+    Communicator    
   ],
   bootstrap: [AppComponent]
 })

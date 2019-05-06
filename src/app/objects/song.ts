@@ -1,15 +1,13 @@
-export class Song{
-    
-    public json: object
+export interface Song{
 
-    public duration: number
-    public artist: string
-    public genre: string
-    public location: string
-    public id: number
-    public title: string
+    duration: number
+    artist: string
+    genre: string
+    location: string
+    id: number
+    title: string
 
-    constructor(paramJson: object){
+    /*constructor(paramJson: object){
 
         this.json = paramJson
 
@@ -19,5 +17,5 @@ export class Song{
         this.location = this.json["location"]
         this.id = this.json["id"]
         this.title = this.json["title"]
-    }
+    }*/
 }

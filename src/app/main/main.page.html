@@ -10,7 +10,7 @@
   <ion-list padding lines="full">
     <ion-item  lines="full" *ngFor="let song  of songs" (click)="playSong(song)"> 
       <div>
-       <ion-label style="font-size: 1.2em;">{{song.name}}</ion-label>  
+       <ion-label style="font-size: 1.2em;">{{song.title}}</ion-label>  
        <ion-label>{{song.artist}}</ion-label> 
       </div>
     </ion-item>
