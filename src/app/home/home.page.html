@@ -33,22 +33,34 @@
       
     <ion-slide>
       <div class="contentdiv">
-        <h1>Wählen Sie ihr Gerät zum Tracken aus der Liste aus:</h1>
-        <ion-card margin lines="full">
-          <ion-item>
-            <ion-label>192.168.1.119</ion-label>
-          </ion-item>
-          <ion-item>
-            <ion-label>192.168.1.119</ion-label>
-          </ion-item>
-          <ion-item>
-            <ion-label>192.168.1.119</ion-label>
-          </ion-item>
-          <ion-item>
-            <ion-label>192.168.1.119</ion-label>
-          </ion-item>
-        </ion-card>
+        <h1>Geben Sie ihr Benutzername an:</h1>
+        <ion-item margin>
+          <ion-input placeholder="username" [(ngModel)]="username"></ion-input>
+          <ion-button (click)="loginUser()">Login</ion-button>
+         </ion-item>
       </div>
     </ion-slide>
+
+    <!--    
+      <ion-slide>
+        <div class="contentdiv">
+          <h1>Wählen Sie ihr Gerät zum Tracken aus der Liste aus:</h1>
+          <ion-card margin lines="full">
+            <ion-item>
+              <ion-label>5B-75-72-CE-4F-22</ion-label>
+            </ion-item>
+            <ion-item>
+              <ion-label>192.168.1.119</ion-label>
+            </ion-item>
+            <ion-item>
+              <ion-label>192.168.1.119</ion-label>
+            </ion-item>
+            <ion-item>
+              <ion-label>192.168.1.119</ion-label>
+            </ion-item>
+          </ion-card>
+        </div>
+      </ion-slide>
+    -->
   </ion-slides>
 </ion-content>

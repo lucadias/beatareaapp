@@ -1,6 +1,7 @@
 import { Component } from '@angular/core'
 import { ViewChild } from '@angular/core'
 import { IonSlides, NavController } from '@ionic/angular'
+import { Communicator } from '../services/communicator'
 
 @Component({
   selector: 'app-home',
@@ -14,15 +15,16 @@ export class HomePage {
   //
   showIfNotFirstSlide: Boolean
   nextButtonText = "WEITER"
-  
-  constructor(public navCtrl: NavController){
+  username: String
+  constructor(public navCtrl: NavController, public coo: Communicator){
     this.showIfNotFirstSlide = true
+    
    
   }
 
   goToNextSlide(){
     this.slides.getActiveIndex().then(result => {
-      if(result == 2){
+      if(result == 2 || result == 1 && localStorage.getItem("user-key") != null){
         this.navCtrl.navigateRoot('/main')
       }
     })
@@ -51,6 +53,10 @@ export class HomePage {
       }
     })
 
+  }
+
+  loginUser(){
+    this.coo.registerUser(this.username)
   }
 
 
