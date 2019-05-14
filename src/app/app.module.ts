@@ -14,7 +14,7 @@ import { Communicator } from './services/communicator';
 
 
 export const MQTT_SERVICE_OPTIONS : IMqttServiceOptions = {
-  hostname: '192.168.1.119',
+  hostname: localStorage.getItem("mqttserver"),
   port: 9001,
   protocol: 'ws',
   path: '/'

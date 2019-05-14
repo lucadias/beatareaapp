@@ -2,6 +2,7 @@ import { Component } from '@angular/core'
 import { ViewChild } from '@angular/core'
 import { IonSlides, NavController } from '@ionic/angular'
 import { Communicator } from '../services/communicator'
+import { ToastController } from '@ionic/angular'
 
 @Component({
   selector: 'app-home',
@@ -16,9 +17,12 @@ export class HomePage {
   showIfNotFirstSlide: Boolean
   nextButtonText = "WEITER"
   username: String
-  constructor(public navCtrl: NavController, public coo: Communicator){
+  serveraddress: string
+  constructor(public navCtrl: NavController, public coo: Communicator, public toastController: ToastController){
     this.showIfNotFirstSlide = true
-    
+    if(localStorage.getItem("mqttserver") != null){
+      this.serveraddress = localStorage.getItem("mqttserver")
+    }
    
   }
 
@@ -57,6 +61,17 @@ export class HomePage {
 
   loginUser(){
     this.coo.registerUser(this.username)
+  }
+
+  async setMQTTServer(serveraddress: string){
+    localStorage.setItem("mqttserver", serveraddress)
+    console.log(localStorage.getItem("mqttserver"))
+    const toast = await this.toastController.create({
+      message: 'Neue Serveraddresse gesetzt',
+      duration: 1000
+    })
+    toast.present()
+    this.goToNextSlide()
   }
 
 

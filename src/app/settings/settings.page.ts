@@ -11,8 +11,6 @@ import { NavController } from '@ionic/angular'
 
 export class SettingsPage  {
 
-
-
   constructor(public navCtrl: NavController) { 
       }
 
@@ -26,9 +24,9 @@ export class SettingsPage  {
     //this.dataList = reorderArray(this.dataList, ev.detail.from, ev.detail.to);
     ev.detail.complete();
   }
-
-
-
+  backToOnboarding(){
+    this.navCtrl.navigateBack('/home');
+  }
   
 }
 
