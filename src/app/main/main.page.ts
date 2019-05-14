@@ -16,11 +16,9 @@ export class MainPage implements OnInit {
   playStatus: string
   indexActiveSong: number
   songplaytimestatus: number
-  
-  tracker1: String
-  tracker2: String
-  tracker3: String
-  
+
+
+
 
   constructor(public navCtrl: NavController, public coo: Communicator) {
     this.currentSong = "-"
@@ -33,50 +31,47 @@ export class MainPage implements OnInit {
       this.songplaytimestatus = this.coo.getSongStatus();
     });*/
     interval(100).subscribe(() => {
-      this.tracker1 = this.coo.getTrackerValues()[0]
-      this.tracker2 = this.coo.getTrackerValues()[1]
-      this.tracker3 = this.coo.getTrackerValues()[2]
       this.updateSongPlayTime();
     });
   }
 
-   
+
   ngOnInit() {
   }
 
-  playSong(song: Song){
+  playSong(song: Song) {
     this.currentSong = song.title
     this.playStatus = "Pause"
     this.coo.pushTrack(song.id)
-    this.indexActiveSong = this.songs.findIndex((searchsong) => {return searchsong.id == song.id})
+    this.indexActiveSong = this.songs.findIndex((searchsong) => { return searchsong.id == song.id })
   }
 
-  
 
-  playNextSong(){
-    this.indexActiveSong = this.indexActiveSong < this.songs.length ? this.indexActiveSong+1 : 0
+
+  playNextSong() {
+    this.indexActiveSong = this.indexActiveSong < this.songs.length ? this.indexActiveSong + 1 : 0
     this.playSong(this.songs[this.indexActiveSong])
   }
 
-  playPrevSong(){
-    this.indexActiveSong = this.indexActiveSong > 0 ? this.indexActiveSong-1 : 0
+  playPrevSong() {
+    this.indexActiveSong = this.indexActiveSong > 0 ? this.indexActiveSong - 1 : 0
     this.playSong(this.songs[this.indexActiveSong])
   }
 
-  playPauseButton(){
+  playPauseButton() {
     this.coo.pauseTrack()
-    if(this.playStatus === "Play"){
+    if (this.playStatus === "Play") {
       this.playStatus = "Pause"
-    } else {  
+    } else {
       this.playStatus = "Play"
     }
   }
 
-  goToSettingsPage(){
+  goToSettingsPage() {
     this.navCtrl.navigateForward('/settings')
   }
 
-  updateSongPlayTime(){
+  updateSongPlayTime() {
     this.songplaytimestatus = this.songplaytimestatus + 0.001
   }
 

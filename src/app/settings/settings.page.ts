@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core'
 import { NavController } from '@ionic/angular'
+import { Communicator } from '../services/communicator'
+
+import { interval } from 'rxjs';
 
 
 @Component({
@@ -11,7 +14,18 @@ import { NavController } from '@ionic/angular'
 
 export class SettingsPage  {
 
-  constructor(public navCtrl: NavController) { 
+
+  tracker1: String
+  tracker2: String
+  tracker3: String
+
+  constructor(public navCtrl: NavController, public coo: Communicator) {
+    interval(100).subscribe(() => {
+      this.tracker1 = this.coo.getTrackerValues()[0]
+      this.tracker2 = this.coo.getTrackerValues()[1]
+      this.tracker3 = this.coo.getTrackerValues()[2]
+      
+    }); 
       }
 
   saveSettings(){

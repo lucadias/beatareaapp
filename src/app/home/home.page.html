@@ -1,11 +1,9 @@
 <ion-content padding>
-  <ion-button *ngIf=showIfNotFirstSlide class="btnPrev" (click)="goToPrevSlide()">ZURÜCK</ion-button>
-  <ion-button class="btnNext" (click)="goToNextSlide()">{{nextButtonText}}</ion-button>
   <ion-slides id="ion-slides" class="slider" pager="true" (ionSlideDidChange)="slideChanged()">
-      
+
     <ion-slide>
       <div class="contentdiv">
-        <img style="float:left;clear:both;padding:2em;" src="../assets/logo.png"/>
+        <img style="float:left;clear:both;padding:2em;" src="../assets/logo.png" />
         <h1 style="font-size: 2em;float:left;clear:both;">Willkommen zu der Beatarea App.</h1>
       </div>
     </ion-slide>
@@ -14,7 +12,7 @@
       <div class="contentdiv">
         <h1 style="clear:both;">Wählen Sie den MQTT Server aus:</h1>
         <ion-card margin lines="full">
-          
+
           <ion-item (click)="setMQTTServer('192.168.1.119')">
             <ion-label>192.168.1.119</ion-label>
           </ion-item>
@@ -27,21 +25,29 @@
         </ion-card>
         <p margin> oder geben Sie ein eigenen MQTT Server an:</p>
         <ion-item margin>
-            <ion-input placeholder="192.168.1.119" [(ngModel)]="serveraddress"></ion-input>
-            <ion-button (click)="setMQTTServer(serveraddress)">Save</ion-button>
-          </ion-item>
+          <ion-input placeholder="192.168.1.119" [(ngModel)]="serveraddress"></ion-input>
+          <ion-button (click)="setMQTTServer(serveraddress)">Save</ion-button>
+        </ion-item>
 
       </div>
     </ion-slide>
-      
+
     <ion-slide>
       <div class="contentdiv">
         <h1>Geben Sie ihr Benutzername an:</h1>
         <ion-item margin>
           <ion-input placeholder="username" [(ngModel)]="username"></ion-input>
           <ion-button (click)="loginUser()">Login</ion-button>
-         </ion-item>
+        </ion-item>
+
+        <ion-label>Sie sind momentan eingeloggt als:</ion-label><br><br>
+        <ion-label>{{username}}</ion-label><br>
+        <ion-label style="font-size:0.7em">{{userkey}}</ion-label>
+
       </div>
+      <ion-button class="btnNext" (click)="goToNextSlide()">LOS</ion-button>
+
+
     </ion-slide>
 
     <!--    

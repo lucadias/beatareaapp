@@ -8,20 +8,10 @@
 }
 
 .btnNext{
-    float:right;
     position: absolute;
-    right:    3em;
-    bottom:   0.8em;
-    z-index:2;
-}
+    bottom:   4em;
+   }
 
-.btnPrev{  
-    float:right;
-    position: absolute;
-    left:    3em;
-    bottom:   0.8em;
-    z-index:2;
-}
 
 ion-button{
     width: 6em;
