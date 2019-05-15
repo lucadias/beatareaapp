@@ -1,56 +1,80 @@
 <ion-content padding>
-  <ion-slides id="ion-slides" class="slider" pager="true" (ionSlideDidChange)="slideChanged()">
+    <ion-slides id="ion-slides" class="slider" pager="true" (ionSlideDidChange)="slideChanged()">
 
-    <ion-slide>
-      <div class="contentdiv">
-        <img style="float:left;clear:both;padding:2em;" src="../assets/logo.png" />
-        <h1 style="font-size: 2em;float:left;clear:both;">Willkommen zu der Beatarea App.</h1>
-      </div>
-    </ion-slide>
+        <ion-slide>
+            <div class="contentdiv">
+                <ion-img style="float:left;clear:both;padding:1em;" src="../assets/logo.png"></ion-img>
+                <h1 style="font-size: 2em;float:left;clear:both;">Willkommen zu der Beatarea App.</h1>
+            </div>
 
-    <ion-slide>
-      <div class="contentdiv">
-        <h1 style="clear:both;">Wählen Sie den MQTT Server aus:</h1>
-        <ion-card margin lines="full">
+        </ion-slide>
 
-          <ion-item (click)="setMQTTServer('192.168.1.119')">
-            <ion-label>192.168.1.119</ion-label>
-          </ion-item>
-          <ion-item (click)="setMQTTServer('192.168.1.100')">
-            <ion-label>192.168.1.100</ion-label>
-          </ion-item>
-          <ion-item (click)="setMQTTServer('192.168.1.200')">
-            <ion-label>192.168.1.200</ion-label>
-          </ion-item>
-        </ion-card>
-        <p margin> oder geben Sie ein eigenen MQTT Server an:</p>
-        <ion-item margin>
-          <ion-input placeholder="192.168.1.119" [(ngModel)]="serveraddress"></ion-input>
-          <ion-button (click)="setMQTTServer(serveraddress)">Save</ion-button>
-        </ion-item>
+        <ion-slide>
+            <div class="contentdiv">
+                <h1 style="clear:both;">Wählen Sie den MQTT Server aus:</h1>
+                <ion-list margin lines="full">
+                    <ion-item (click)="setMQTTServer('192.168.1.119')">
+                        <ion-label>192.168.1.119</ion-label>
+                    </ion-item>
+                    <ion-item (click)="setMQTTServer('192.168.1.100')">
+                        <ion-label>192.168.1.100</ion-label>
+                    </ion-item>
+                    <ion-item (click)="setMQTTServer('192.168.1.200')">
+                        <ion-label>192.168.1.200</ion-label>
+                    </ion-item>
+                </ion-list>
+                <p margin> oder geben Sie ein eigenen MQTT Server an:</p>
+                <ion-item margin>
+                    <ion-input placeholder="192.168.1.119" [(ngModel)]="serveraddress"></ion-input>
+                    <ion-button (click)="setMQTTServer(serveraddress)">Save</ion-button>
+                </ion-item>
 
-      </div>
-    </ion-slide>
-
-    <ion-slide>
-      <div class="contentdiv">
-        <h1>Geben Sie ihr Benutzername an:</h1>
-        <ion-item margin>
-          <ion-input placeholder="username" [(ngModel)]="username"></ion-input>
-          <ion-button (click)="loginUser()">Login</ion-button>
-        </ion-item>
-
-        <ion-label>Sie sind momentan eingeloggt als:</ion-label><br><br>
-        <ion-label>{{username}}</ion-label><br>
-        <ion-label style="font-size:0.7em">{{userkey}}</ion-label>
-
-      </div>
-      <ion-button class="btnNext" (click)="goToNextSlide()">LOS</ion-button>
+            </div>
+        </ion-slide>
 
 
-    </ion-slide>
+        <ion-slide>
+            <div class="contentdiv">
+                <h1>Welche Geräte sollen getrackt werden?</h1>
+                <ion-list margin lines="full">
+                    <ion-item lines="full" *ngFor="let device  of devices" (click)="setAvailableDevices(device.mac)">
+                        <ion-label>{{device.name}}</ion-label>
+                        <ion-label>{{device.mac}}</ion-label>
+                    </ion-item>
 
-    <!--    
+                </ion-list>
+
+            </div>
+        </ion-slide>
+
+        <ion-slide>
+            <div class="contentdiv">
+                <h1>Geben Sie ihr Benutzername an:</h1>
+                <ion-item margin>
+                    <ion-input placeholder="{{storageusername}}" [(ngModel)]="username"></ion-input>
+                    <ion-button (click)="loginUser()">Register</ion-button>
+                </ion-item>
+
+                <ion-label>Sie sind momentan eingeloggt als:</ion-label><br><br>
+                <ion-label>{{storageusername}}</ion-label><br>
+                <ion-label style="font-size:0.7em">{{userkey}}</ion-label>
+                <br>
+
+
+            </div>
+            <ion-item no-lines no-margin style="position:absolute;width: 14em;bottom: 11em;">
+                <ion-label no-margin>Nicht wieder anzeigen.</ion-label>
+                <ion-checkbox no-padding no-margin checked="true" class="checkbox" [(ngModel)]="automaticUserLoginBool" (ionChange)="automaticUserLogin($event)">
+                </ion-checkbox>
+            </ion-item>
+            <ion-button color="danger" class="btnNext" style="width: 14em;bottom:8em;" (click)="resetLocalStorage()">reset local storage</ion-button>
+            <ion-button class="btnNext" (click)="goToNextSlide()" [disabled]="losButtonDisabled">LOS</ion-button>
+
+
+
+        </ion-slide>
+
+        <!--    
       <ion-slide>
         <div class="contentdiv">
           <h1>Wählen Sie ihr Gerät zum Tracken aus der Liste aus:</h1>
@@ -71,5 +95,5 @@
         </div>
       </ion-slide>
     -->
-  </ion-slides>
+    </ion-slides>
 </ion-content>

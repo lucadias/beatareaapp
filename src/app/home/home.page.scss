@@ -1,18 +1,25 @@
 //Set the Slider height to the whole page
 .slider {
     height: 100%;
-  }
+}
 
 .contentdiv {
     margin-top: -10em;
 }
 
-.btnNext{
+.btnNext {
     position: absolute;
-    bottom:   4em;
-   }
+    bottom: 4em;
+}
 
-
-ion-button{
+ion-button {
     width: 6em;
+}
+
+.checkboxitem {
+    background-color: transparent !important;
+    border: none;
+    font-size: 0.8em;
+    margin: auto;
+    width: 14em;
 }
