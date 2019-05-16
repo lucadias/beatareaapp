@@ -39,6 +39,7 @@ export class SettingsPage  {
     ev.detail.complete();
   }
   backToOnboarding(){
+    localStorage.setItem("skipuserlogin","false")
     this.navCtrl.navigateBack('/home');
   }
   

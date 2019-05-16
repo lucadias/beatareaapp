@@ -7,6 +7,7 @@ import { Device } from '../objects/device'
 import { interval } from 'rxjs';
 
 
+
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -50,14 +51,14 @@ export class HomePage {
     this.slides.getActiveIndex().then(result => {
       if (result == 3) {
         this.navCtrl.navigateRoot('/main')
-      }
-      if (result == 2 && this.userkey != "undefined") {
+      } else if (result == 2 && localStorage.getItem("user-key") != undefined && localStorage.getItem("skipuserlogin") === "true") {
         this.navCtrl.navigateRoot('/main')
+      } else {
+        this.slides.slideNext()
+        this.slideChanged()
       }
-
     })
-    this.slides.slideNext()
-    this.slideChanged()
+
 
 
   }
@@ -76,7 +77,7 @@ export class HomePage {
   slideChanged() {
     this.slides.lockSwipes(false)
     this.slides.getActiveIndex().then(result => {
-      
+
       if (result == 2) {
         this.connectToMQTT()
         if (this.devicetoTrack == null) {
@@ -86,7 +87,7 @@ export class HomePage {
       if (result == 1 && localStorage.getItem("mqttserver") == null) {
         this.slides.lockSwipes(true)
       }
-      
+
     })
 
   }
