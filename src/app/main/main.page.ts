@@ -3,6 +3,7 @@ import { NavController } from '@ionic/angular'
 import { Communicator } from '../services/communicator'
 import { Song } from '../objects/song'
 import { interval } from 'rxjs';
+import { Platform } from '@ionic/angular';
 
 @Component({
   selector: 'app-main',
@@ -16,23 +17,57 @@ export class MainPage implements OnInit {
   playStatus: string
   indexActiveSong: number
   songplaytimestatus: number
+  songplaytimestatusformatted: number
+  currontsonglength: number
 
 
 
 
-  constructor(public navCtrl: NavController, public coo: Communicator) {
+  constructor(public navCtrl: NavController, public coo: Communicator, public plt: Platform) {
     this.currentSong = "-"
     this.playStatus = "Play"
     this.songs = coo.getSongListString()
     this.songplaytimestatus = 0
+    this.songplaytimestatusformatted = 0
+    this.currontsonglength = 0
 
-    /*interval(1000).subscribe(() => {
+    interval(1000).subscribe(() => {
       console.log(this.coo.getSongStatus())
-      this.songplaytimestatus = this.coo.getSongStatus();
-    });*/
+      this.songplaytimestatus = this.coo.getSongStatus()
+      this.currontsonglength = this.coo.getCurrontSongLength()
+    });
     interval(100).subscribe(() => {
       this.updateSongPlayTime();
     });
+
+    plt.ready().then(() => {
+      console.log("called after init")
+      this.onDeviceReady()
+    });
+  }
+
+  ngOnAfterViewInit(){
+   
+
+  }
+
+  onDeviceReady() {
+    document.addEventListener("volumedownbutton", this.onVolumeDown, false);
+    document.addEventListener("volumeupbutton", this.onVolumeUp, false);
+    
+    // Add similar listeners for other events
+  }
+
+  onVolumeDown() {
+    // Handle the pause event
+    this.coo.volumeUp()
+    console.log("volume down")
+  }
+
+  onVolumeUp() {
+    this.coo.volumeDown()
+    console.log("volumeup")
+    // Handle the resume event
   }
 
 
@@ -72,7 +107,7 @@ export class MainPage implements OnInit {
   }
 
   updateSongPlayTime() {
-    this.songplaytimestatus = this.songplaytimestatus + 0.001
+    this.songplaytimestatusformatted = ((this.songplaytimestatus * 100) / this.currontsonglength) * 0.001
   }
 
 

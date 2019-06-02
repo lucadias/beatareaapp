@@ -27,19 +27,18 @@ export class HomePage {
   public connectedToMQTT: Boolean = false
   devices: Array<Device>
   devicetoTrack: String
-  automaticUserLoginBool: Boolean
+  skipUserLoginScreen: Boolean
+  automaticUserMQTTLoggedInBool: Boolean
   losButtonDisabled: Boolean
 
   constructor(public navCtrl: NavController, public coo: Communicator, public toastController: ToastController) {
     this.showIfLastSlide = false
     this.showIfSuccessfullRegister = false
-    this.automaticUserLoginBool = true
+    this.skipUserLoginScreen = true
+    this.automaticUserMQTTLoggedInBool = false
 
-    if (localStorage.getItem("registration-success") == "true") {
-      this.losButtonDisabled = false
-    } else {
-      this.losButtonDisabled = true
-    }
+
+    
     if (localStorage.getItem("mqttserver") != null) {
       this.serveraddress = localStorage.getItem("mqttserver")
     }
@@ -48,7 +47,7 @@ export class HomePage {
   }
 
   goToNextSlide() {
-    this.slides.getActiveIndex().then(result => {
+      this.slides.getActiveIndex().then(result => {
       if (result == 3) {
         this.navCtrl.navigateRoot('/main')
       } else if (result == 2 && localStorage.getItem("user-key") != undefined && localStorage.getItem("skipuserlogin") === "true") {
@@ -87,6 +86,18 @@ export class HomePage {
       if (result == 1 && localStorage.getItem("mqttserver") == null) {
         this.slides.lockSwipes(true)
       }
+      if(result == 3 && !this.automaticUserMQTTLoggedInBool && localStorage.getItem("user-key") != null){
+        this.automaticUserMQTTLoggedInBool = true
+        this.coo.automaticUserLogin()
+      }
+      if (result == 3){
+        if (localStorage.getItem("registration-success") == "true") {
+          this.losButtonDisabled = false
+        } else {
+          this.losButtonDisabled = true
+        }
+       
+      }
 
     })
 
@@ -108,7 +119,6 @@ export class HomePage {
   }
 
   setMQTTServer(serveraddress: string) {
-
     localStorage.setItem("mqttserver", serveraddress)
     //this.connectToMQTT()
     this.slides.lockSwipes(false)
@@ -134,10 +144,7 @@ export class HomePage {
   }
 
   automaticUserLogin(e: any) {
-
-
-    console.log(this.automaticUserLoginBool)
-    localStorage.setItem("skipuserlogin", JSON.stringify(this.automaticUserLoginBool))
-
+    console.log(this.skipUserLoginScreen)
+    localStorage.setItem("skipuserlogin", JSON.stringify(this.skipUserLoginScreen))
   }
 }

@@ -4,7 +4,6 @@
     <ion-icon name="settings" style="margin-top:0.4em;margin-right:1em;float:right;font-size: 2em;" (click)="goToSettingsPage()"></ion-icon>
   </ion-toolbar>
 </ion-header>
-
 <ion-content>
   <div>
   <ion-list padding lines="full">
@@ -20,7 +19,7 @@
 
 
 <ion-footer>
-  <ion-progress-bar value={{songplaytimestatus}}></ion-progress-bar>
+  <ion-progress-bar value={{songplaytimestatusformatted}}></ion-progress-bar>
   <ion-toolbar>
     <div style="float:left;clear:both;padding-left: 1em;width:100%;" text-center>
     <ion-label style="width:100%;float:left;clear:both">Now Playing: </ion-label>

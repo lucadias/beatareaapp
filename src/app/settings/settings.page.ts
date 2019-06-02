@@ -12,7 +12,7 @@ import { interval } from 'rxjs';
 })
 
 
-export class SettingsPage  {
+export class SettingsPage {
 
 
   tracker1: String
@@ -20,15 +20,9 @@ export class SettingsPage  {
   tracker3: String
 
   constructor(public navCtrl: NavController, public coo: Communicator) {
-    interval(100).subscribe(() => {
-      this.tracker1 = this.coo.getTrackerValues()[0]
-      this.tracker2 = this.coo.getTrackerValues()[1]
-      this.tracker3 = this.coo.getTrackerValues()[2]
-      
-    }); 
-      }
+  }
 
-  saveSettings(){
+  saveSettings() {
     this.navCtrl.navigateBack('/main');
   }
 
@@ -38,11 +32,11 @@ export class SettingsPage  {
     //this.dataList = reorderArray(this.dataList, ev.detail.from, ev.detail.to);
     ev.detail.complete();
   }
-  backToOnboarding(){
-    localStorage.setItem("skipuserlogin","false")
+  backToOnboarding() {
+    localStorage.setItem("skipuserlogin", "false")
     this.navCtrl.navigateBack('/home');
   }
-  
+
 }
 
 

@@ -8,9 +8,6 @@
   <p padding>Hier können Sie die einzelnen Lautsprecher gruppieren und einstellen.</p>
   <ion-button style="display:block;margin:auto;width: 14em" (click)="backToOnboarding()">Benutzer wechseln</ion-button>
   <div style="float:left;clear:both;padding-left: 1em;width:100%;margin-top:1em" text-center>
-    <ion-label style="width:100%;float:left;clear:both">Tracker1: {{tracker1}}</ion-label>
-    <ion-label style="width:100%;float:left;clear:both">Tracker2: {{tracker2}}</ion-label>
-    <ion-label style="width:100%;float:left;clear:both">Tracker3: {{tracker3}}</ion-label>
   </div>
   <ion-reorder-group (ionItemReorder)="onRenderItems($event)" disabled="true">
     <ion-reorder>
